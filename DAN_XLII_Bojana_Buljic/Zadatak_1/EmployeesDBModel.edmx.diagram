@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c2f6ea2c5f9b420bb62d99562f0cbe49" Name="Diagram1">
+        <EntityTypeShape EntityType="EmployeeDBModel.tblEmployee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeDBModel.tblGender" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeDBModel.tblLocation" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeDBModel.tblSector" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeDBModel.vwEmployee" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EmployeeDBModel.FK__tblEmploy__Gende__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeeDBModel.FK__tblEmploy__Locat__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeeDBModel.FK__tblEmploy__Secto__76969D2E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
