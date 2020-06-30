@@ -65,11 +65,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="EmployeesDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="Services\IEmployeeService.cs" />
+    <Compile Include="Services\ILocationService.cs" />
+    <Compile Include="Services\LocationService.cs" />
     <Compile Include="tblEmployee.cs">
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
@@ -82,7 +87,12 @@
     <Compile Include="tblSector.cs">
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="vwEmployee.cs">
+      <DependentUpon>EmployeesDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwLocation.cs">
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -156,6 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
