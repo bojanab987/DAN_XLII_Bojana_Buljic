@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Zadatak_1.Services
 {
-    interface ILocationService
+    interface ISectorService
     {
-        List<vwLocation> GetAllLocations();
-        void AddLocation();
-        List<string> ReadLocationsFile();
+        tblSector AddSector(string sector);
+        List<tblSector> GetAllSectors();
     }
 }

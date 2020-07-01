@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,38 +9,59 @@ namespace Zadatak_1.Services
 {
     public class LocationService : ILocationService
     {
+        static string file = @"../../Files/Locations.txt";
+        static EmployeeRecordsEntities context = new EmployeeRecordsEntities();
+
         /// <summary>
-        /// Method for adding location into database
+        /// Method for reading locations from file
         /// </summary>
-        /// <param name="location"></param>
-        /// <returns>new location</returns>
-        public tblLocation AddLocation(tblLocation location)
+        /// <returns>List of locations</returns>
+        public List<string> ReadLocationsFile()
         {
+            List<string> locations = new List<string>();
+
             try
             {
-                using (EmployeeRecordsEntities context = new EmployeeRecordsEntities())
+                using (StreamReader reader = new StreamReader(file))
                 {
-                    tblLocation newLocation = new tblLocation();
-                    newLocation.Street = location.Street;
-                    newLocation.City = location.City;
-                    newLocation.Country = location.Country;
-                    context.tblLocations.Add(newLocation);
-                    context.SaveChanges();
-                    location.LocationID = newLocation.LocationID;
-
-                    //file loging background worker
-                    //FileLoging fileLog = FileLoging.Instance();
-                    //fileLog.LogAddLocationToFile(location);
-
-                    return location;
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        locations.Add(line);
+                    }
                 }
+                return locations;
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Not possible to read file");
                 System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
                 return null;
             }
         }
+
+        /// <summary>
+        /// Method for adding locations from file into database
+        /// </summary>        
+        public void AddLocation()
+        {                        
+            tblLocation location = new tblLocation();
+            List<string> locations = ReadLocationsFile();
+            foreach (var loc in locations)
+            {
+                string[] lines = loc.Split(',');
+                location.Street = lines[0];
+                location.City = lines[1];
+                location.Country = lines[2];
+
+                context.tblLocations.Add(location);
+                context.SaveChanges();
+            }           
+
+                    //file loging background worker
+                    //FileLoging fileLog = FileLoging.Instance();
+                    //fileLog.LogAddLocationToFile(location);                 
+        }     
 
         /// <summary>
         /// Method gets all locations from database

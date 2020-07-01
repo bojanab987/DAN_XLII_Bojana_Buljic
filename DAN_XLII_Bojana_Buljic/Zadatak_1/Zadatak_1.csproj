@@ -74,7 +74,9 @@
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\IEmployeeService.cs" />
     <Compile Include="Services\ILocationService.cs" />
+    <Compile Include="Services\ISectorService.cs" />
     <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Services\SectorService.cs" />
     <Compile Include="tblEmployee.cs">
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
@@ -163,6 +165,7 @@
       <DependentUpon>EmployeesDBModel.edmx</DependentUpon>
       <LastGenOutput>EmployeesDBModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Files\Locations.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
