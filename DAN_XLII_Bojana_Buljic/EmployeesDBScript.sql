@@ -21,13 +21,15 @@ DROP TABLE tblLocations;
 --drop view Employees
 IF OBJECT_ID('vwEmployees') IS NOT NULL
 DROP VIEW vwEmployees
+
 --drop view Locations
 IF OBJECT_ID('vwLocations') IS NOT NULL
 DROP VIEW vwLocations
+
 --drop view Managers
---drop view Locations
 IF OBJECT_ID('vwManagers') IS NOT NULL
 DROP VIEW vwManagers
+
 
 --Creating tables
 --first we create tblLocations since we need it first on application start
@@ -80,6 +82,7 @@ SELECT LocationID, Street+','+City+','+Country AS Location
 FROM tblLocations;
 go
 
+
 --Creating Employees view
 CREATE VIEW vwEmployees
 AS
@@ -101,4 +104,5 @@ AS
 SELECT EmployeeID, FullName AS Manager
 from tblEmployees;
 go
+
 
