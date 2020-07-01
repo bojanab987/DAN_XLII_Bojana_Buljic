@@ -115,16 +115,15 @@
                  Grid.Row="5"
                  Name="txtIdentityCard"
                  Height="25"
-                 Width="auto"
-                 PreviewTextInput="NumberValidationTextBox"
-                 Text="{Binding Employee.IdentityCard, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, TargetNullValue=''}" />
+                 Width="auto"                 
+                 Text="{Binding Employee.IdentityCard, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="3"
                  Grid.ColumnSpan="2"
                  Grid.Row="7"
                  Name="txtJMBG"
                  Height="25"
-                 PreviewTextInput="NumberValidationTextBox"
-                 Text="{Binding Employee.JMBG, UpdateSourceTrigger=PropertyChanged,ValidatesOnExceptions=True, TargetNullValue=''}" />
+                 
+                 Text="{Binding Employee.JMBG, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Column="3"
                     Grid.ColumnSpan="2"
                     Grid.Row="9"

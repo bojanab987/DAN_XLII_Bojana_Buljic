@@ -76,6 +76,7 @@
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\ISectorService.cs" />
     <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Services\LogActions.cs" />
     <Compile Include="Services\SectorService.cs" />
     <Compile Include="tblEmployee.cs">
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
@@ -89,7 +90,11 @@
     <Compile Include="tblSector.cs">
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Validations\IDCardValidation.cs" />
+    <Compile Include="Validations\JMBGValidations.cs" />
+    <Compile Include="Validations\PhoneNoValidation.cs" />
     <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
+    <Compile Include="ViewModel\EditEmployeeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AddEmployee.xaml.cs">

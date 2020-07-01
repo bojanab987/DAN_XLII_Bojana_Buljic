@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Zadatak_1.Commands;
@@ -17,12 +15,9 @@ namespace Zadatak_1.ViewModel
         MainWindow main;
         ILocationService locationService;
         IEmployeeService employeeService;
-        //backgroundWorker object, set properties to true
-        BackgroundWorker backgroundWorker = new BackgroundWorker()
-        {
-            WorkerReportsProgress = true,
-            WorkerSupportsCancellation=true
-        };
+        //backgroundWorker object
+        BackgroundWorker backgroundWorker = new BackgroundWorker();
+        
 
         #region Constructors
         public MainWindowViewModel(MainWindow mainOpen)
@@ -31,9 +26,16 @@ namespace Zadatak_1.ViewModel
             locationService = new LocationService();
             employeeService = new EmployeeService();
             locationService.AddLocation();
-            employeeList = employeeService.GetAllEmployees();
+            EmployeeList = employeeService.GetAllEmployees();
+            backgroundWorker.DoWork += DeleteDoWork;
         }
         #endregion
+
+        public void DeleteDoWork(object sender, DoWorkEventArgs e)
+        {
+            string result = "New employee: " + Employee.FullName + "with ID " + Employee.EmployeeID + " is deleted from database.";
+            LogActions.GetLog().PrintInFile(result);
+        }
 
         #region Properties
         private List<vwEmployee> employeeList;
@@ -61,12 +63,12 @@ namespace Zadatak_1.ViewModel
             }
         }
 
-        //private bool isEmployeeDeleted;
-        //public bool IsEmployeeDeleted
-        //{
-        //    get { return isEmployeeDeleted; }
-        //    set { isEmployeeDeleted = value; }
-        //}
+        private bool isEmployeeDeleted;
+        public bool IsEmployeeDeleted
+        {
+            get { return isEmployeeDeleted; }
+            set { isEmployeeDeleted = value; }
+        }
         #endregion
 
         #region Commands
@@ -104,6 +106,8 @@ namespace Zadatak_1.ViewModel
                     {
                         case MessageBoxResult.Yes:
                             employeeService.DeleteEmployee(employeeID);
+                            backgroundWorker.RunWorkerAsync();
+                            IsEmployeeDeleted = true;
                             EmployeeList = employeeService.GetAllEmployees().ToList();   
                             break;
                     }
@@ -156,7 +160,7 @@ namespace Zadatak_1.ViewModel
             {
                 if (Employee != null)
                 {
-                    EditEmployee editEmployee = new EditEmployee(Employee);
+                    EditEmployee editEmployee = new EditEmployee();
                     editEmployee.ShowDialog();
 
                     //we read employees from database in case we added new 

@@ -111,18 +111,19 @@ namespace Zadatak_1.Services
         }
 
         /// <summary>
-        /// Method for choosing gender from table Genders
+        /// Method for gett all genders from table
         /// </summary>
         /// <param name="gender"></param>
         /// <returns> </returns>
-        public tblGender GetGender(string gender)
+        public List<tblGender> GetGenders()
         {
             try
             {
                 using (EmployeeRecordsEntities context = new EmployeeRecordsEntities())
                 {
-                    tblGender selectedGender = (from g in context.tblGenders where g.Gender == gender select g).First();
-                    return selectedGender;
+                    List<tblGender> genders = new List<tblGender>();
+                    genders = (from x in context.tblGenders select x).ToList();
+                    return genders;
                 }
             }
             catch (Exception ex)
@@ -200,6 +201,52 @@ namespace Zadatak_1.Services
             {
                 System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Method to select employee by his JMBG
+        /// </summary>
+        /// <param name="JMBG"></param>
+        /// <returns></returns>
+        /// <remarks>we use this during JMBG input validation</remarks>
+        public tblEmployee GetEmployeeJMBG(string JMBG)
+        {
+            try
+            {
+                using (EmployeeRecordsEntities context = new EmployeeRecordsEntities())
+                {
+                    tblEmployee employee = (from x in context.tblEmployees where x.JMBG == JMBG select x).First();
+                    return employee;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Method to select employe by his ID card no.
+        /// </summary>
+        /// <param name="identityCard"></param>
+        /// <returns></returns>
+        /// /// <remarks>we use this during  ID card no. input validation</remarks>
+        public tblEmployee GetEmployeeIDCard(string identityCard)
+        {
+            try
+            {
+                using (EmployeeRecordsEntities context = new EmployeeRecordsEntities())
+                {
+                    tblEmployee employee = (from x in context.tblEmployees where x.IdentityCard == identityCard select x).First();
+                    return employee;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
             }
         }
     }
