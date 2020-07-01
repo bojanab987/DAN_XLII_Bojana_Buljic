@@ -22,6 +22,15 @@ DROP TABLE tblLocations;
 IF OBJECT_ID('vwEmployees') IS NOT NULL
 DROP VIEW vwEmployees
 
+--drop view Locations
+IF OBJECT_ID('vwLocations') IS NOT NULL
+DROP VIEW vwLocations
+
+--drop view Managers
+IF OBJECT_ID('vwManagers') IS NOT NULL
+DROP VIEW vwManagers
+
+
 --Creating tables
 --first we create tblLocations since we need it first on application start
 CREATE TABLE tblLocations(
@@ -67,12 +76,18 @@ INSERT INTO tblSectors(SectorName)
 VALUES('HR Department'),('Legal Department'),('Finance Department'), ('Research and Development'),('Production'),('Marketing');
 go
 
+CREATE VIEW vwLocations
+AS
+SELECT LocationID, Street+','+City+','+Country AS Location
+FROM tblLocations;
+go
+
 
 --Creating Employees view
 CREATE VIEW vwEmployees
 AS
-SELECT e.EmployeeID, e.FullName,e.DateOfBirth, e.IdentityCard, e.JMBG, Gender, e.PhoneNo,
-CONCAT(Street, ',', City, ',', Country) AS Location,SectorName, m.FullName AS Manager
+SELECT e.EmployeeID, e.FullName,e.DateOfBirth, e.IdentityCard, e.JMBG,e.GenderID, Gender, e.PhoneNo,
+CONCAT(Street, ',', City, ',', Country) AS Location,e.LocationID, SectorName, e.SectorID,e.ManagerID, m.FullName AS Manager
 from tblEmployees e
 inner join tblLocations l
 on e.LocationID=l.LocationID
@@ -81,7 +96,13 @@ on e.GenderID=g.GenderID
 inner join tblSectors s
 on e.SectorID=s.SectorID
 inner join tblEmployees m
-on e.ManagerID=m.EmployeeID
-Order By e.FullName
-OFFSET 0 ROWS;
+on e.ManagerID=m.EmployeeID;
+go
+
+CREATE VIEW vwManagers
+AS
+SELECT EmployeeID, FullName AS Manager
+from tblEmployees;
+go
+
 
