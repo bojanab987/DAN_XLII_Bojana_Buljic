@@ -15,14 +15,21 @@ namespace Zadatak_1.ViewModel
     class MainWindowViewModel:ViewModelBase
     {
         MainWindow main;
-        ILocationService locationService=new LocationService();
-        IEmployeeService employeeService = new EmployeeService();
-        BackgroundWorker backgroundWorker = new BackgroundWorker();
+        ILocationService locationService;
+        IEmployeeService employeeService;
+        //backgroundWorker object, set properties to true
+        BackgroundWorker backgroundWorker = new BackgroundWorker()
+        {
+            WorkerReportsProgress = true,
+            WorkerSupportsCancellation=true
+        };
 
         #region Constructors
         public MainWindowViewModel(MainWindow mainOpen)
         {
             main = mainOpen;
+            locationService = new LocationService();
+            employeeService = new EmployeeService();
             locationService.AddLocation();
             employeeList = employeeService.GetAllEmployees();
         }
@@ -38,18 +45,7 @@ namespace Zadatak_1.ViewModel
                 employeeList = value;
                 OnPropertyChanged("EmployeeList");
             }
-        }
-
-        private vwEmployee viewEmployees;
-        public vwEmployee ViewEmployees
-        {
-            get { return viewEmployees; }
-            set
-            {
-                viewEmployees = value;
-                OnPropertyChanged("ViewEmployees");
-            }
-        }
+        }        
 
         private vwEmployee employee;
         public vwEmployee Employee
@@ -65,12 +61,12 @@ namespace Zadatak_1.ViewModel
             }
         }
 
-        private bool isEmployeeDeleted;
-        public bool IsEmployeeDeleted
-        {
-            get { return isEmployeeDeleted; }
-            set { isEmployeeDeleted = value; }
-        }
+        //private bool isEmployeeDeleted;
+        //public bool IsEmployeeDeleted
+        //{
+        //    get { return isEmployeeDeleted; }
+        //    set { isEmployeeDeleted = value; }
+        //}
         #endregion
 
         #region Commands
@@ -90,6 +86,9 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Deleting employee execution method
+        /// </summary>
         private void DeleteEmployeeExecute()
         {
             try
@@ -116,6 +115,10 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Method check if deletion is possible
+        /// </summary>
+        /// <returns>true or false</returns>
         private bool CanDeleteEmployeeExecute()
         {
             if (Employee == null)
@@ -128,6 +131,9 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Edit employee command
+        /// </summary>
         private ICommand editEmployee;
         public ICommand EditEmployee
         {
@@ -141,6 +147,9 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void EditEmployeeExecute()
         {
             try
@@ -172,6 +181,9 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Add employee command
+        /// </summary>
         private ICommand addEmployee;
         public ICommand AddEmployee
         {
@@ -185,6 +197,9 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Method called on AddEmployee button click...adds new employee into database and updates Employee view
+        /// </summary>
         private void AddEmployeeExecute()
         {
             try
@@ -192,12 +207,22 @@ namespace Zadatak_1.ViewModel
                 AddEmployee addEmployee= new AddEmployee();
                 addEmployee.ShowDialog();
 
+                if((addEmployee.DataContext as AddEmployeeViewModel).IsUpdateEmployee==true)
+                {
+                    EmployeeList = employeeService.GetAllEmployees().ToList();
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        /// <summary>
+        /// Method to check if execution of add command is possible
+        /// </summary>
+        /// <returns></returns>
         private bool CanAddEmployeeExecute()
         {
             return true;

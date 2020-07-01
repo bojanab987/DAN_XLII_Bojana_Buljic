@@ -60,7 +60,7 @@ namespace Zadatak_1.Services
         /// </summary>
         /// <param name="employee"></param>
         /// <returns>employee object</returns>
-        public tblEmployee AddEditEmployee(tblEmployee employee)
+        public vwEmployee AddEditEmployee(vwEmployee employee)
         {
             try
             {
@@ -93,6 +93,7 @@ namespace Zadatak_1.Services
                         newEmployee.SectorID = employee.SectorID;
                         newEmployee.LocationID = employee.LocationID;
                         newEmployee.ManagerID = employee.ManagerID;
+                        context.tblEmployees.Add(newEmployee);
                         context.SaveChanges();
                         employee.EmployeeID = newEmployee.EmployeeID;
                         return employee;
@@ -106,6 +107,99 @@ namespace Zadatak_1.Services
             {
                 System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Method for choosing gender from table Genders
+        /// </summary>
+        /// <param name="gender"></param>
+        /// <returns> </returns>
+        public tblGender GetGender(string gender)
+        {
+            try
+            {
+                using (EmployeeRecordsEntities context = new EmployeeRecordsEntities())
+                {
+                    tblGender selectedGender = (from g in context.tblGenders where g.Gender == gender select g).First();
+                    return selectedGender;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Method that gets all possible managers from database
+        /// </summary>
+        /// <returns>list of possible managers</returns>
+        public List<vwManager> GetPossibleManagers()
+        {
+            try
+            {
+                using (EmployeeRecordsEntities context = new EmployeeRecordsEntities())
+                {
+                    List<vwManager> managers = new List<vwManager>();
+                    managers = (from m in context.vwManagers where m.Manager != (" ") select m).ToList();
+                    return managers;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Method to get manager by name
+        /// </summary>
+        /// <param name="managerName"></param>
+        /// <returns>selected manager</returns>
+        public vwManager GetManager(string managerName)
+        {
+            try
+            {
+                using (EmployeeRecordsEntities context = new EmployeeRecordsEntities())
+                {
+                    vwManager selectedManager = (from m in context.vwManagers where m.Manager == managerName select m).First();
+                    return selectedManager;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Method to check if employee is manager
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <returns>true or false</returns>
+        public bool IsManager(int employeeID)
+        {
+            try
+            {
+                using (EmployeeRecordsEntities context = new EmployeeRecordsEntities())
+                {
+                    tblEmployee employee = (from e in context.tblEmployees where e.ManagerID == employeeID select e).First();
+
+                    if(employee==null)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
             }
         }
     }

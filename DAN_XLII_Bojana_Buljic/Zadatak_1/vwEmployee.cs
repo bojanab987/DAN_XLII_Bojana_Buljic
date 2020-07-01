@@ -24,5 +24,9 @@ namespace Zadatak_1
         public string Location { get; set; }
         public string SectorName { get; set; }
         public string Manager { get; set; }
+        public Nullable<int> GenderID { get; set; }
+        public Nullable<int> LocationID { get; set; }
+        public Nullable<int> SectorID { get; set; }
+        public Nullable<int> ManagerID { get; set; }
     }
 }

@@ -10,6 +10,11 @@ namespace Zadatak_1.Services
     {
         List<vwEmployee> GetAllEmployees();
         void DeleteEmployee(int employeeID);
-        tblEmployee AddEditEmployee(tblEmployee employee);
+        vwEmployee AddEditEmployee(vwEmployee employee);
+        tblGender GetGender(string gender);
+        List<vwManager> GetPossibleManagers();
+        vwManager GetManager(string managerName);
+        bool IsManager(int employeeID);
+    
     }
 }

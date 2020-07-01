@@ -21,16 +21,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="6" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="6" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="6" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="6" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="6" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="6" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" /> 
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
@@ -44,7 +35,7 @@
         <Grid Grid.Column="1" Grid.Row="3" Height="auto" Width="auto">
             <DataGrid Name="DataGridEmployeesDetails"
                       ItemsSource="{Binding EmployeeList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding ViewEmployees, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Employee, UpdateSourceTrigger=PropertyChanged}"
                       IsReadOnly="True" HeadersVisibility="Column" AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black"
                       Foreground="Black" FontWeight="Bold">

@@ -89,6 +89,7 @@
     <Compile Include="tblSector.cs">
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AddEmployee.xaml.cs">
@@ -101,6 +102,9 @@
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="vwLocation.cs">
+      <DependentUpon>EmployeesDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwManager.cs">
       <DependentUpon>EmployeesDBModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">

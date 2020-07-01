@@ -31,5 +31,6 @@ namespace Zadatak_1
         public virtual DbSet<tblSector> tblSectors { get; set; }
         public virtual DbSet<vwEmployee> vwEmployees { get; set; }
         public virtual DbSet<vwLocation> vwLocations { get; set; }
+        public virtual DbSet<vwManager> vwManagers { get; set; }
     }
 }

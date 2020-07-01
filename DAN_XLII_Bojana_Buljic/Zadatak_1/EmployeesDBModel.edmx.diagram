@@ -14,6 +14,7 @@
         <AssociationConnector Association="EmployeeDBModel.FK__tblEmploy__Locat__778AC167" ManuallyRouted="false" />
         <AssociationConnector Association="EmployeeDBModel.FK__tblEmploy__Secto__76969D2E" ManuallyRouted="false" />
         <EntityTypeShape EntityType="EmployeeDBModel.vwLocation" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="EmployeeDBModel.vwManager" Width="1.5" PointX="5.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
